@@ -34,17 +34,21 @@ public class burgerEnemyAI : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("fist"))
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            player.GetComponent<Movement>().health -= 10;
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("rightHand"))
         {
             health -= 3;
             if (health < 1)
                 Destroy(this.gameObject);
         }
 
-        else if(collision.gameObject.CompareTag("Player"))
-        {
-            player.GetComponent<Movement>().health -= 10;
-
-        }
     }
 }
