@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
 
     public int health = 100;
-    public bool middle3Fingers;
+    public bool middleThreeFingers;
     public bool indexFinger;
 
     // Start is called before the first frame update
@@ -21,23 +22,15 @@ public class Movement : MonoBehaviour
     {
         
     }
-    /*void OnActivate(InputValue inputValue)
+    void OnTrigHold(InputValue inputValue)
     {
-        if(inputValue.isPressed())
-        {
             middleThreeFingers = true;
-        }
-        else
-            middle3Fingers = false;
     }
 
-    void OnSelect(InputValue inputvalue)
+    void OnGripHold(InputValue inputValue)
     {
-        if (inputValue.isPressed())
-        {
-            indexFinger = true;
-        }
-        else
-            indexFinger = false;
-    }*/
+        indexFinger = true;
+    }
+
+    void OnRestart() { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
 }
