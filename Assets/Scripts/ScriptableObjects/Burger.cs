@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Burger : ScriptableObject
+[CreateAssetMenu(fileName = "New Order", menuName = "Order/Burger")]
+public class Burger : OrderItem
 {
     public bool hasCheese;
     public bool hasLettuce;

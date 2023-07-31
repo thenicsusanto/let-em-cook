@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Order", menuName = "Order/FrenchFry")]
-public class FrenchFry : ScriptableObject
+public class FrenchFry : OrderItem
 {
     public OrderSize orderSize;
     public float cookTime = 30f;

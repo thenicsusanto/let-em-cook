@@ -6,6 +6,6 @@ using UnityEngine;
 public class Order : ScriptableObject
 {
     public string orderNumber;
-    public GameObject[] menuItems;
+    public OrderItem[] menuItems;
     public float totalCost;
 }
