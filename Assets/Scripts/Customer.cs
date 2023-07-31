@@ -20,7 +20,8 @@ public class Customer : MonoBehaviour
     private enum State
     {
         Walking,
-        Waiting,
+        WaitingForFood,
+        WaitingToOrder
     }
 
     // Start is called before the first frame update
@@ -51,7 +52,7 @@ public class Customer : MonoBehaviour
             if(nextPointIndex >= points.Count)
             {
                 Debug.Log("Reached ending point");
-                state = State.Waiting;
+                state = State.WaitingToOrder;
                 return;
             }
             nextPoint = points[nextPointIndex];

@@ -38,14 +38,6 @@ public class ButtonVR : MonoBehaviour
         }
     }
 
-    //public void SpawnSphere()
-    //{
-    //    GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-    //    sphere.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-    //    sphere.transform.localPosition = new Vector3(0, 1, 2);
-    //    sphere.AddComponent<Rigidbody>();
-    //}
-
     public void StartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
