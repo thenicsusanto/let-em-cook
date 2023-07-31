@@ -3,15 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class GameLoop : MonoBehaviour
 {
+    public bool won;
+    public bool lost;
+
     //runtime variables
     bool enemySpawn;
 
 
     //runtime variables
-    public int roundNum;
+    public static int roundNum;
 
     public int customersHelped;
     public int customersFailed;
@@ -36,7 +40,7 @@ public class GameLoop : MonoBehaviour
     int[][] enemy5 = { new int[] { 3, 6 }, new int[] { 1, 3 }, new int[] { 1, 3 } };
 
 
-    List<int[][]> rounds;
+    List<int[][]> rounds = new List<int[][]>();
 
     //game objects
     public GameObject player;
@@ -45,6 +49,11 @@ public class GameLoop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        roundNum++;
+
+        lost = false;
+        won = false;
+
         customersHelped = 0;
         customersFailed = 0;
         enemiesSpawned = 0;
@@ -58,6 +67,8 @@ public class GameLoop : MonoBehaviour
         minute = 0;
 
         StartCoroutine(nextEnemySpawn());
+
+        Debug.Log(roundNum);
 
     }
 
@@ -77,19 +88,20 @@ public class GameLoop : MonoBehaviour
             StartCoroutine(nextEnemySpawn());
         }
 
-        if (customersHelped == numOfCustomers[roundNum])
+        if (customersHelped == numOfCustomers[roundNum] || Input.GetKeyDown(KeyCode.F))
         {
             //reload screen, but change roundNum to ++
+            if(roundNum == 4)
+                won = true;
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
 
-        if (customersFailed <= 3)
+        if (customersFailed >= 3 || player.GetComponent<Movement>().health <= 0)
         {
-            //load failed screen
-        }
-
-        if (player.GetComponent<Movement>().health <= 0)
-        {
-            //load failed screen
+            lost = true;
         }
 
 
