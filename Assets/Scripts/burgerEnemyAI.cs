@@ -8,23 +8,24 @@ public class burgerEnemyAI : MonoBehaviour
 {
 
     public GameObject player;
-    public Animator anim;
+    /*public Animator anim;*/
 
     int health = 10;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim.SetBool("Coming Closer", true);
+        /*anim.SetBool("Coming Closer", true);*/
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Mathf.Abs(player.transform.position.x - transform.position.x) > 5 &&
-            Mathf.Abs(player.transform.position.z - transform.position.z) > 5)
+        if(Mathf.Abs(player.transform.position.x - transform.position.x) < 1 &&
+            Mathf.Abs(player.transform.position.z - transform.position.z) < 1)
         {
-            anim.SetBool("Attacking", true);
+            /*anim.SetBool("Attacking", true);*/
         }
         else
         {
