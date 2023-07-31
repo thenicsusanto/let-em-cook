@@ -7,12 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class GameLoop : MonoBehaviour
 {
+    //list of points
+    public List<Transform> points;
+
+
+    //win booleans
     public bool won;
     public bool lost;
 
     //runtime variables
     bool enemySpawn;
-
 
     //runtime variables
     public static int roundNum;
@@ -84,14 +88,14 @@ public class GameLoop : MonoBehaviour
 
         if (enemySpawn && enemiesSpawned < numOfEnemies[roundNum])
         {
-            //instantiate later
+            //Instantiate(enemy, points[Random.Range(0, points.Count)]);
             StartCoroutine(nextEnemySpawn());
         }
 
         if (customersHelped == numOfCustomers[roundNum] || Input.GetKeyDown(KeyCode.F))
         {
             //reload screen, but change roundNum to ++
-            if(roundNum == 4)
+            if (roundNum == 4)
                 won = true;
             else
             {
