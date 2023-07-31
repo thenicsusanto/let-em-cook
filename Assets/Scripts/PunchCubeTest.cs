@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PunchCubeTest : MonoBehaviour
 {
-   
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class PunchCubeTest : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("rightHand"))
+        if(other.CompareTag("rightHand") && player.GetComponent<Movement>().middle3Fingers && player.GetComponent<Movement>().indexFinger)
         {
             Vector3 vel = other.gameObject.GetComponent<Rigidbody>().velocity;
             if(vel.x != 0 || vel.z != 0 || vel.y != 0.1)
