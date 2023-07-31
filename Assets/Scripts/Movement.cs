@@ -24,11 +24,13 @@ public class Movement : MonoBehaviour
     }
     void OnTrigHold(InputValue inputValue)
     {
-            middleThreeFingers = true;
+        Debug.Log("middleFiner");
+        middleThreeFingers = true;
     }
 
     void OnGripHold(InputValue inputValue)
     {
+        Debug.LogError("indexFinger");
         indexFinger = true;
     }
 
