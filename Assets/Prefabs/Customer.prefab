@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2791214740420344866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.5, y: 0.6, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2791214741584507964}
@@ -120,7 +120,9 @@ MonoBehaviour:
   checkPointsWaitPrefab: {fileID: 7700352890960757686, guid: 629908e19df0d164d9d8e937c8431fd6,
     type: 3}
   rotationSpeed: 3
+  nextPoint: {fileID: 0}
   order: {fileID: 11400000, guid: 9bcb3521e7c7e3c4786ec3d25794730b, type: 2}
+  recipePrefab: {fileID: 0}
 --- !u!1 &2791214741584507967
 GameObject:
   m_ObjectHideFlags: 0

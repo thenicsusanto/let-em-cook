@@ -117,6 +117,7 @@ public class Customer : MonoBehaviour
     {
         Debug.Log("Order taken");
         GameObject newRecipe = Instantiate(recipePrefab, transform.position, Quaternion.identity);
+        newRecipe.GetComponent<Receipt>().order1.text = order.menuItems[0].CheckOrders();
         //Write code for customer to walk back and wait for food
         state = State.WalkingToWait;
         nextPoint = waitPoints[0];
