@@ -39,12 +39,12 @@ public class Customer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveCustomer();
+        MoveCustomerToOrder();
         RotateCustomer();
     }
 
     #region Movement
-    void MoveCustomer()
+    void MoveCustomerToOrder()
     {
         if(transform.position == nextPoint.position)
         {
