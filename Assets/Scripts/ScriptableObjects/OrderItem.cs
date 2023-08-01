@@ -5,4 +5,8 @@ using UnityEngine;
 public class OrderItem : ScriptableObject
 {
 
+    public virtual string CheckOrders() 
+    {
+        return null;
+    }
 }

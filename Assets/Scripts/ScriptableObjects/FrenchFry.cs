@@ -6,7 +6,11 @@ using UnityEngine;
 public class FrenchFry : OrderItem
 {
     public OrderSize orderSize;
-    public float cookTime = 30f;
+
+    public override string CheckOrders()
+    {
+        return "1x " + orderSize.ToString() + " French Fries";
+    }
 }
 
 public enum OrderSize

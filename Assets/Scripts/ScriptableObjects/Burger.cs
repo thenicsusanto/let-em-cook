@@ -9,5 +9,30 @@ public class Burger : OrderItem
     public bool hasLettuce;
     public bool hasTomatoes;
     public bool hasOnions;
-    public float cookTime = 60f;
+    string cheese = "";
+    string lettuce = "";
+    string tomato = "";
+    string onion = "";
+
+    public override string CheckOrders()
+    {
+        if (hasCheese)
+        {
+            cheese = "with cheese";
+        }
+        if (hasLettuce)
+        {
+            lettuce = "with lettuce";
+        }
+        if(hasTomatoes)
+        {
+            tomato = "with tomatoes";
+        }
+        if(hasOnions)
+        {
+            tomato = "with onion";
+        }
+
+        return "1x " + "Hotdog " + cheese + lettuce + tomato + onion;
+    }
 }

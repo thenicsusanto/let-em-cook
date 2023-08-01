@@ -7,5 +7,29 @@ public class HotDog : OrderItem
 {
     public bool hasKetchup;
     public bool hasMustard;
-    public float cookTime = 60f;
+    string ketchup = "";
+    string mustard = "";
+
+    public override string CheckOrders()
+    {   
+        if(hasKetchup)
+        {
+            ketchup = "with ketchup";
+        }
+        else
+        {
+            ketchup = "";
+        }
+
+        if(hasMustard)
+        {
+            mustard = "with mustard";
+        }
+        else
+        {
+            mustard = "";
+        }
+
+        return "1x " + "Hotdog " + ketchup + mustard;
+    }
 }

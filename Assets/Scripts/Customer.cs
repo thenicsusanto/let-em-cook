@@ -16,6 +16,7 @@ public class Customer : MonoBehaviour
     Vector3 direction;
 
     public Order order;
+    [SerializeField] private GameObject recipePrefab;
 
     private State state;
 
@@ -115,6 +116,7 @@ public class Customer : MonoBehaviour
     public void TakeOrder()
     {
         Debug.Log("Order taken");
+        GameObject newRecipe = Instantiate(recipePrefab, transform.position, Quaternion.identity);
         //Write code for customer to walk back and wait for food
         state = State.WalkingToWait;
         nextPoint = waitPoints[0];

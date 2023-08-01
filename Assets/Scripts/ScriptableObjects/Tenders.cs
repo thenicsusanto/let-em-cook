@@ -6,5 +6,9 @@ using UnityEngine;
 public class Tenders : OrderItem
 {
     public int tenderAmount;
-    public float cookTime = 60f;
+
+    public override string CheckOrders()
+    {
+        return tenderAmount.ToString() + "x" + " Chicken Tenders";
+    }
 }
