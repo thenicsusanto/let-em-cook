@@ -112,9 +112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d4f89f2b70ef84daf502a4ac5310ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: []
+  orderPoints: []
+  waitPoints: []
   objectSpeed: 3
-  checkPointsHolder: {fileID: 5157521230044610960, guid: 2d5f48537d2e45746a87150503e75321,
+  checkPointsOrderPrefab: {fileID: 5157521230044610960, guid: 2d5f48537d2e45746a87150503e75321,
+    type: 3}
+  checkPointsWaitPrefab: {fileID: 7700352890960757686, guid: 629908e19df0d164d9d8e937c8431fd6,
     type: 3}
   rotationSpeed: 3
   order: {fileID: 11400000, guid: 9bcb3521e7c7e3c4786ec3d25794730b, type: 2}

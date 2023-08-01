@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Customer : MonoBehaviour
 {
-    [SerializeField] private List<Transform> points = new List<Transform>();
+    [SerializeField] private List<Transform> orderPoints = new List<Transform>();
+    [SerializeField] private List<Transform> waitPoints = new List<Transform>();
     [SerializeField] private float objectSpeed;
-    [SerializeField] private GameObject checkPointsHolder;
+    [SerializeField] private GameObject checkPointsOrderPrefab;
+    [SerializeField] private GameObject checkPointsWaitPrefab;
     [SerializeField] private float rotationSpeed;
     int nextPointIndex;
-    Transform nextPoint;
+    public Transform nextPoint;
     Quaternion lookRotation;
     Vector3 direction;
 
@@ -19,7 +21,8 @@ public class Customer : MonoBehaviour
 
     private enum State
     {
-        Walking,
+        WalkingToOrder,
+        WalkingToWait,
         WaitingForFood,
         WaitingToOrder
     }
@@ -27,19 +30,32 @@ public class Customer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        state = State.Walking;
+        state = State.WalkingToOrder;
 
-        for(int i=0; i<checkPointsHolder.transform.childCount; i++)
+        for (int i = 0; i < checkPointsOrderPrefab.transform.childCount; i++)
         {
-            points.Add(checkPointsHolder.transform.GetChild(i));
+            orderPoints.Add(checkPointsOrderPrefab.transform.GetChild(i));
         }
-        nextPoint = points[0];  
+
+        for (int i = 0; i < checkPointsWaitPrefab.transform.childCount; i++)
+        {
+            waitPoints.Add(checkPointsWaitPrefab.transform.GetChild(i));
+        }
+
+        nextPoint = orderPoints[0];  
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveCustomerToOrder();
+        if(state == State.WalkingToOrder)
+        {
+            MoveCustomerToOrder();
+        }
+        else if(state == State.WalkingToWait)
+        {
+            MoveCustomerToWait();
+        }
         RotateCustomer();
     }
 
@@ -49,13 +65,33 @@ public class Customer : MonoBehaviour
         if(transform.position == nextPoint.position)
         {
             nextPointIndex++;
-            if(nextPointIndex >= points.Count)
+            if(nextPointIndex >= orderPoints.Count)
             {
-                Debug.Log("Reached ending point");
+                Debug.Log("Reached ending point for order");
                 state = State.WaitingToOrder;
                 return;
             }
-            nextPoint = points[nextPointIndex];
+            nextPoint = orderPoints[nextPointIndex];
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, nextPoint.position, objectSpeed * Time.deltaTime);
+            //transform.LookAt(nextPoint.position, Vector3.up);
+        }
+    }
+
+    void MoveCustomerToWait()
+    {
+        if (transform.position == nextPoint.position)
+        {
+            nextPointIndex++;
+            if (nextPointIndex >= waitPoints.Count)
+            {
+                Debug.Log("Reached ending point for wait");
+                state = State.WaitingForFood;
+                return;
+            }
+            nextPoint = waitPoints[nextPointIndex];
         }
         else
         {
@@ -66,13 +102,6 @@ public class Customer : MonoBehaviour
 
     void RotateCustomer()
     {
-        if (nextPointIndex >= points.Count)
-        {
-            direction = (new Vector3(0, 0.75f, 0.25f) - transform.position).normalized;
-            lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-            return;
-        }
         direction = (nextPoint.position - transform.position).normalized;
 
         //create the rotation we need to be in to look at the target
@@ -87,5 +116,8 @@ public class Customer : MonoBehaviour
     {
         Debug.Log("Order taken");
         //Write code for customer to walk back and wait for food
+        state = State.WalkingToWait;
+        nextPoint = waitPoints[0];
+        nextPointIndex = 0;
     }
 }
