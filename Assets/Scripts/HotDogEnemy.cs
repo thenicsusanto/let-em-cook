@@ -32,4 +32,16 @@ public class HotDogEnemy : MonoBehaviour
         yield return new WaitForSeconds(3);
         toFire = true;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("rightHand") && player.GetComponent<Movement>().middleThreeFingers && player.GetComponent<Movement>().indexFinger)
+        {
+            Vector3 vel = other.gameObject.GetComponent<Rigidbody>().velocity;
+            if(vel.x != 0 || vel.z != 0 || vel.y != 0.1)
+            {
+                GetComponent<HotDogEnemy>().enabled = false;
+            }
+        }
+    }
 }
