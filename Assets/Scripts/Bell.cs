@@ -22,7 +22,7 @@ public class Bell : MonoBehaviour
     {
         if (!isPressed)
         {
-            button.transform.localPosition = new Vector3(0, 0.003f, 0);
+            button.transform.localPosition = new Vector3(0, -0.01f, 0);
             presser = other.gameObject;
             onPress.Invoke();
             isPressed = true;
@@ -33,7 +33,7 @@ public class Bell : MonoBehaviour
     {
         if (other.gameObject == presser)
         {
-            button.transform.localPosition = new Vector3(0, 0.015f, 0);
+            button.transform.localPosition = new Vector3(0, 0, 0);
             onRelease.Invoke();
             isPressed = false;
         }
@@ -43,6 +43,7 @@ public class Bell : MonoBehaviour
     {
         if (orderPlatform.takeOrder)
         {
+            Debug.Log("Takes Order from CheckTakeOrder in Bell Script");
             orderPlatform.currentCustomer.GetComponent<Customer>().TakeOrder();
         }
     }

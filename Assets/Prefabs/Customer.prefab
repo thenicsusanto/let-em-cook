@@ -122,7 +122,8 @@ MonoBehaviour:
   rotationSpeed: 3
   nextPoint: {fileID: 0}
   order: {fileID: 11400000, guid: 9bcb3521e7c7e3c4786ec3d25794730b, type: 2}
-  recipePrefab: {fileID: 0}
+  recipePrefab: {fileID: 3726756057439826346, guid: 90b74ff4c525b1c4db85afbc9cdfed9b,
+    type: 3}
 --- !u!1 &2791214741584507967
 GameObject:
   m_ObjectHideFlags: 0
