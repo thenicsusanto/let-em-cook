@@ -9,6 +9,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     private int currentWaveIndex;
     [SerializeField] private bool waveSpawned = false;
+    [SerializeField] private GameObject customerPrefab;
 
     private void Start()
     {
@@ -28,10 +29,11 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        for(int i=0; i < waves[currentWaveIndex].customers.Length; i++)
+        for(int i=0; i < waves[currentWaveIndex].customerOrders.Length; i++)
         {
-            Instantiate(waves[currentWaveIndex].customers[i], spawnPoint.position, Quaternion.identity);
-
+            //change this to spawn customer prefab with different customer order
+            GameObject newCustomer = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity);
+            newCustomer.gameObject.GetComponent<Customer>().order = waves[currentWaveIndex].customerOrders[i];
             yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextCustomer);
         }
     }
@@ -39,7 +41,7 @@ public class WaveSpawner : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        public GameObject[] customers;
+        public Order[] customerOrders;
         public float timeToNextCustomer;
     }
 }

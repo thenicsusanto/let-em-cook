@@ -85,6 +85,7 @@ public class Customer : MonoBehaviour
 
     public void TakeOrder()
     {
-        Debug.Log("Take order");
+        Debug.Log("Order taken");
+        //Write code for customer to walk back and wait for food
     }
 }

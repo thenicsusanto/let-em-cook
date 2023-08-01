@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class OrderPlatform : MonoBehaviour
 {
-    private bool takeOrder;
+    public bool takeOrder;
+    public GameObject currentCustomer;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Customer"))
         {
             takeOrder = true;
+            currentCustomer = other.gameObject;
         }
     }
 
@@ -19,6 +21,7 @@ public class OrderPlatform : MonoBehaviour
         if (other.CompareTag("Customer"))
         {
             takeOrder = false;
+            currentCustomer = null;
         }
     }
 }
