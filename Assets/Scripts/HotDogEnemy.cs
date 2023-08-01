@@ -21,7 +21,9 @@ public class HotDogEnemy : MonoBehaviour
         if(toFire)
         {
             toFire = false;
-            Instantiate(attackDog, transform.position, Quaternion.identity);
+            GameObject dog = Instantiate(attackDog, transform.position, Quaternion.identity);
+            dog.transform.localScale = new Vector3(5, 5, 5);
+            StartCoroutine(shootHotDog());
         }
     }
 
