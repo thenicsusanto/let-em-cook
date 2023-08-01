@@ -9,6 +9,8 @@ public class DogAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        transform.eulerAngles = player.transform.position - transform.position;
         GetComponent<Rigidbody>().velocity = (player.transform.position - transform.position) * Time.deltaTime;
     }
 
