@@ -53,6 +53,7 @@ public class Bell : MonoBehaviour
         //Remove this code and use bell when checking collect order
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            TheAudioManager.Instance.PlaySFX("Bell");
             Debug.Log("checking collect order with space bar");
             CheckCollectOrder();
         }
