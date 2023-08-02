@@ -22,6 +22,15 @@ public class grillBehavior : MonoBehaviour
         canInteract = false;
     }
 
+    [SerializeField] private Material frozenMat;
+    [SerializeField] private Material pregrilled;
+    [SerializeField] private Material grilledMat;
+    [SerializeField] private Material overcooked;
+
+    private GameObject hotDog;
+
+    public AudioSource grillNoise;
+
     // Update is called once per frame
     void Update()
     {
@@ -59,6 +68,8 @@ public class grillBehavior : MonoBehaviour
 
             canInteract = true;
             StartCoroutine(StartTimer(10f));
+            //TheAudioManager.Instance.PlaySFX("MeatSlap");
+            //grillNoise.Play();
         }
     }
 
@@ -66,6 +77,7 @@ public class grillBehavior : MonoBehaviour
     {
         other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         other.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        hotDog = other.gameObject;
     }
 
     private void OnTriggerExit(Collider other)
@@ -75,12 +87,17 @@ public class grillBehavior : MonoBehaviour
         else
         {
             Debug.Log("Left collider " + other.gameObject.name);
-            if (Time.time - timer < 4.5)
+            if (slider.value < 0.5)
+            {
                 other.gameObject.GetComponent<hotDogFood>().underCooked = true;
-            else if (Time.time - timer > 5.5 && Time.time - timer < 10)
+            }
+            else if (slider.value > 1)
+            {
                 other.gameObject.GetComponent<hotDogFood>().overCooked = true;
+            }   
             else
                 other.gameObject.GetComponent<hotDogFood>().cookedProperly = true;
+
             other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;
             canInteract = false;
@@ -92,9 +109,24 @@ public class grillBehavior : MonoBehaviour
     {
         float timer = 0;
         while (timer < sec && canInteract) 
-        { 
+        {
+            if (slider.value > 0.2f && slider.value < 0.5)
+            {
+                hotDog.GetComponentInChildren<Renderer>().material = pregrilled;
+            }
+            else if (slider.value >= 0.5 && slider.value < 0.9f)
+            {
+                hotDog.GetComponentInChildren<Renderer>().material = grilledMat;
+            }
+            else if(slider.value >= 0.9f)
+            {
+                hotDog.GetComponentInChildren<Renderer>().material = overcooked;
+                //Debug.Log(hotDog.GetComponentInChildren<Renderer>().material);
+            }
+
             slider.value = timer / sec;
             timer += Time.deltaTime;
+            Debug.Log("Slider Value: " + slider.value);
             yield return null;
         }
         

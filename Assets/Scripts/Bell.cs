@@ -1,3 +1,4 @@
+using OVR;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class Bell : MonoBehaviour
             presser = other.gameObject;
             onPress.Invoke();
             isPressed = true;
+            TheAudioManager.Instance.PlaySFX("Bell");
         }
     }
 
@@ -35,7 +37,7 @@ public class Bell : MonoBehaviour
         {
             button.transform.localPosition = new Vector3(0, 0, 0);
             onRelease.Invoke();
-            TheAudioManager.Instance.PlaySFX("Bell");
+            //TheAudioManager.Instance.PlaySFX("Bell");
 
             isPressed = false;
         }
@@ -45,7 +47,6 @@ public class Bell : MonoBehaviour
     {
         if (orderPlatform.takeOrder)
         {
-
             Debug.Log("Takes Order from CheckTakeOrder in Bell Script");
             orderPlatform.currentCustomer.GetComponent<Customer>().TakeOrder();
         }

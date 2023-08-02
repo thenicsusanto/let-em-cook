@@ -147,6 +147,8 @@ public class Customer : MonoBehaviour
     IEnumerator CollectFood()
     {
         yield return new WaitForSeconds(2f);
+        GameObject hotDog = GameObject.Find("HotDogBun");
+        Destroy(hotDog);
         nextPointIndex = 0;
         state = State.WalkingToLeave;
     }
@@ -184,9 +186,9 @@ public class Customer : MonoBehaviour
 
     public void TakeOrder()
     {
-        GameObject newRecipe = Instantiate(recipePrefab, transform.position, Quaternion.identity);
+        GameObject newRecipe = Instantiate(recipePrefab, new Vector3(-0.0140008926f, 0.843999982f, 0.995999992f), Quaternion.Euler(new Vector3(90, 0, 0)));
         newRecipe.GetComponent<Receipt>().order1.text = order.menuItems[0].CheckOrders();
-        newRecipe.GetComponent<Receipt>().order2.text = order.menuItems[1].CheckOrders();
+        //newRecipe.GetComponent<Receipt>().order2.text = order.menuItems[1].CheckOrders();
         //Write code for customer to walk back and wait for food
         state = State.WalkingToWait;
         nextPoint = waitPoints[0];
