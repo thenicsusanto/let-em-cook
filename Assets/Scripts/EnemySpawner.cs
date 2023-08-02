@@ -13,16 +13,18 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private bool waveSpawned = false;
 
+    float placeHolder;
+
     private void Start()
     {
-
+        placeHolder = 0;
     }
 
     private void Update()
     {
-        countDown -= Time.deltaTime;
+        placeHolder -= Time.deltaTime;
 
-        if (!waveSpawned && countDown <= 0)
+        if (!waveSpawned && placeHolder <= 0)
         {
             StartCoroutine(SpawnWave());
             waveSpawned = true;
@@ -40,6 +42,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject newCustomer = Instantiate(enemyPrefabList[enemyToSpawn], enemySpawnPoint[spawnIndex].position, Quaternion.identity);
             yield return new WaitForSeconds(waves[currentWaveIndex].timingBetweenEnemies);
         }
+        placeHolder = countDown;
     }
 
     [System.Serializable]
