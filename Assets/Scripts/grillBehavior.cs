@@ -87,16 +87,20 @@ public class grillBehavior : MonoBehaviour
         else
         {
             Debug.Log("Left collider " + other.gameObject.name);
-            if (slider.value < 0.5)
+
+            if (slider.value > 0.2f && slider.value < 0.5)
             {
                 other.gameObject.GetComponent<hotDogFood>().underCooked = true;
             }
-            else if (slider.value > 1)
+            else if (slider.value >= 0.5 && slider.value < 0.9f)
+            {
+                other.gameObject.GetComponent<hotDogFood>().cookedProperly = true;
+            }
+            else if (slider.value >= 0.9f)
             {
                 other.gameObject.GetComponent<hotDogFood>().overCooked = true;
-            }   
-            else
-                other.gameObject.GetComponent<hotDogFood>().cookedProperly = true;
+                //Debug.Log(hotDog.GetComponentInChildren<Renderer>().material);
+            }
 
             other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;

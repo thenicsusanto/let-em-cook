@@ -12,6 +12,7 @@ public class HotDogEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         StartCoroutine(shootHotDog());
     }
 
@@ -37,11 +38,13 @@ public class HotDogEnemy : MonoBehaviour
     {
         if(other.CompareTag("rightHand") && player.GetComponent<Movement>().middleThreeFingers && player.GetComponent<Movement>().indexFinger)
         {
-            Vector3 vel = other.gameObject.GetComponent<Rigidbody>().velocity;
-            if(vel.x != 0 || vel.z != 0 || vel.y != 0.1)
-            {
-                Destroy(this.gameObject);
-            }
+            //Debug.Log("Puched");
+            //Vector3 vel = other.gameObject.GetComponent<Rigidbody>().velocity;
+            //if(vel.x != 0 || vel.z != 0 || vel.y != 0)
+            //{
+            //    Destroy(this.gameObject);
+            //}
+            Destroy(gameObject);
         }
     }
 }

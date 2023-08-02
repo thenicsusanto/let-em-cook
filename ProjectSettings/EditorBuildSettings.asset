@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/UI Test.unity
-    guid: ba5f6bd0bf6859a4089c3ae82b371565
+  - enabled: 1
+    path: Assets/Scenes/Testing1 1.unity
+    guid: 1ae7a73931823c447a9adb016bd7f1ed
   - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 98290228eef6ed649bc51729ff0e1c2a
@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Testing2.unity
     guid: 5f00642ab05414e15bce5dc759207e85
+  - enabled: 0
+    path: Assets/Scenes/UI Test.unity
+    guid: ba5f6bd0bf6859a4089c3ae82b371565
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: b70b11585eb2d434fb2a087b770e38d6,
       type: 2}

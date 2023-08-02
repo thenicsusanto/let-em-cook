@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e0be5644baf5b4f961a37052757f47, type: 3}
-  m_Name: Tenders
+  m_Script: {fileID: 11500000, guid: 286c798c072418348bf9223a9e711171, type: 3}
+  m_Name: HotDog
   m_EditorClassIdentifier: 
-  tenderAmount: 5
-  cookTime: 60
+  hasKetchup: 0
+  hasMustard: 0
