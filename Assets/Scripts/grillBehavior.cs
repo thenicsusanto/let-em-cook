@@ -25,8 +25,9 @@ public class grillBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canInteract)
+        /*if (canInteract)
         {
+            Debug.Log(Time.time - timer);
             grillItem.gameObject.GetComponent<XRGrabInteractable>().enabled = true;
             if (Time.time - timer >= 10)
             {
@@ -35,12 +36,12 @@ public class grillBehavior : MonoBehaviour
                 Destroy(grillItem);
             }
             else
-                slider.value = (Time.time - timer) / 10;
-        }
+                slider.value = (Time.time - timer) * 10;
+        }*/
 
-        
 
-        
+
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,12 +50,22 @@ public class grillBehavior : MonoBehaviour
             indexOfGrillItems = 0;
         else
         {
-            timer = Time.time;
+            timer = (float)Time.time;
             grillItem = other.gameObject;
-            other.gameObject.GetComponent<XRGrabInteractable>().enabled = false;
-            other.gameObject.transform.position = new Vector3(-2, 0.9f, -1.8f);
-            StartCoroutine(grillCoolDown());
+            
+            other.gameObject.transform.position = new Vector3(-1.247f, 0.872f, 0.316f);
+
+            other.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(0, 90, 0));
+
+            canInteract = true;
+            StartCoroutine(StartTimer(10f));
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        other.gameObject.GetComponent<Rigidbody>().useGravity = false;
     }
 
     private void OnTriggerExit(Collider other)
@@ -63,19 +74,30 @@ public class grillBehavior : MonoBehaviour
             indexOfGrillItems = 0;
         else
         {
+            Debug.Log("Left collider " + other.gameObject.name);
             if (Time.time - timer < 4.5)
                 other.gameObject.GetComponent<hotDogFood>().underCooked = true;
             else if (Time.time - timer > 5.5 && Time.time - timer < 10)
                 other.gameObject.GetComponent<hotDogFood>().overCooked = true;
             else
                 other.gameObject.GetComponent<hotDogFood>().cookedProperly = true;
+            other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            canInteract = false;
         }
+        
     }
 
-    IEnumerator grillCoolDown()
+    IEnumerator StartTimer(float sec)
     {
-        yield return new WaitForSeconds(2);
-        canInteract = true;
-    }
+        float timer = 0;
+        while (timer < sec && canInteract) 
+        { 
+            slider.value = timer / sec;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        
 
+    }
 }

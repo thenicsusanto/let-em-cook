@@ -20,6 +20,7 @@ public class hotDogFood : MonoBehaviour
         overCooked = false;
 
         this.gameObject.GetComponentInChildren<DogAttack>().enabled = false;
+
     }
 
     // Update is called once per frame
@@ -27,14 +28,23 @@ public class hotDogFood : MonoBehaviour
     {
         if (GetComponent<HotDogEnemy>().isActiveAndEnabled)
         {
-            this.GetComponent<MeshRenderer>().material = materials[0];
+            this.GetComponentInChildren<MeshRenderer>().material = materials[0];
             this.gameObject.GetComponentInChildren<DogAttack>().enabled = true;
         }
         else
         {
-            this.GetComponent<MeshRenderer>().material = materials[1];
+            this.GetComponentInChildren<MeshRenderer>().material = materials[1];
             this.gameObject.GetComponentInChildren<DogAttack>().enabled = true;
         }
+
+        Debug.Log(GetComponent<Rigidbody>().isKinematic + " kinematic");
             
+    }
+
+    public void SetRigidbody()
+    {
+        Debug.Log("Settubg rigidbody");
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<Rigidbody>().useGravity = true;
     }
 }
