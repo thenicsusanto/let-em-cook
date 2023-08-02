@@ -93,7 +93,6 @@ public class Customer : MonoBehaviour
             nextPointIndex++;
             if(nextPointIndex >= orderPoints.Count)
             {
-                Debug.Log("Reached ending point for order");
                 state = State.WaitingToOrder;
                 return;
             }
@@ -113,7 +112,6 @@ public class Customer : MonoBehaviour
             nextPointIndex++;
             if (nextPointIndex >= waitPoints.Count)
             {
-                Debug.Log("Reached ending point for wait");
                 state = State.WaitingForFood;
                 return;
             }
@@ -133,7 +131,6 @@ public class Customer : MonoBehaviour
             nextPointIndex++;
             if (state != State.Delaying && nextPointIndex >= collectPoints.Count)
             {
-                Debug.Log("Reached ending point for collect");
                 StartCoroutine(CollectFood());
                 state = State.Delaying;
                 return;
@@ -161,7 +158,6 @@ public class Customer : MonoBehaviour
             nextPointIndex++;
             if (nextPointIndex >= leavePoints.Count)
             {
-                Debug.Log("Reached ending point for leave");
                 Destroy(gameObject);
                 return;
             }
@@ -188,10 +184,7 @@ public class Customer : MonoBehaviour
 
     public void TakeOrder()
     {
-        Debug.Log("Order taken");
         GameObject newRecipe = Instantiate(recipePrefab, transform.position, Quaternion.identity);
-        Debug.Log("First Order: " + order.menuItems[0].CheckOrders());
-        Debug.Log("Second Order: " + order.menuItems[1].CheckOrders());
         newRecipe.GetComponent<Receipt>().order1.text = order.menuItems[0].CheckOrders();
         newRecipe.GetComponent<Receipt>().order2.text = order.menuItems[1].CheckOrders();
         //Write code for customer to walk back and wait for food

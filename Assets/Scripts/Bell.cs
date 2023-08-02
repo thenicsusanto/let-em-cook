@@ -35,6 +35,8 @@ public class Bell : MonoBehaviour
         {
             button.transform.localPosition = new Vector3(0, 0, 0);
             onRelease.Invoke();
+            TheAudioManager.Instance.PlaySFX("Bell");
+
             isPressed = false;
         }
     }
@@ -43,6 +45,7 @@ public class Bell : MonoBehaviour
     {
         if (orderPlatform.takeOrder)
         {
+
             Debug.Log("Takes Order from CheckTakeOrder in Bell Script");
             orderPlatform.currentCustomer.GetComponent<Customer>().TakeOrder();
         }
@@ -51,12 +54,12 @@ public class Bell : MonoBehaviour
     private void Update()
     {
         //Remove this code and use bell when checking collect order
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            TheAudioManager.Instance.PlaySFX("Bell");
-            Debug.Log("checking collect order with space bar");
-            CheckCollectOrder();
-        }
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    TheAudioManager.Instance.PlaySFX("Bell");
+        //    Debug.Log("checking collect order with space bar");
+        //    CheckCollectOrder();
+        //}
     }
 
     public void CheckCollectOrder()
