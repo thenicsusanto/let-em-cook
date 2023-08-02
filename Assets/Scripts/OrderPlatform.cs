@@ -7,16 +7,20 @@ public class OrderPlatform : MonoBehaviour
     public bool takeOrder;
     public GameObject currentCustomer;
 
+    bool forPCTesting;
+
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Customer"))
+        //take away "&& !forPCTesting" when testing in VR
+        if(other.CompareTag("Customer") && !forPCTesting)
         {
             takeOrder = true;
             currentCustomer = other.gameObject;
 
             //delete below code when testing in vr because you are gonna press the bell
-            //Debug.Log("Take order was called");
-            //currentCustomer.GetComponent<Customer>().TakeOrder();
+            Debug.Log("Take order was called");
+            currentCustomer.GetComponent<Customer>().TakeOrder();
+            forPCTesting = true;
         }
     }
 
