@@ -6,6 +6,7 @@ public class OrderPlatform : MonoBehaviour
 {
     public bool takeOrder;
     public GameObject currentCustomer;
+    public GameObject priorityCustomer;
 
     bool forPCTesting;
 
@@ -30,6 +31,7 @@ public class OrderPlatform : MonoBehaviour
         {
             takeOrder = false;
             currentCustomer = null;
+            priorityCustomer = other.gameObject;
         }
     }
 }

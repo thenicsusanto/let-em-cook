@@ -6,9 +6,13 @@ public class Customer : MonoBehaviour
 {
     [SerializeField] private List<Transform> orderPoints = new List<Transform>();
     [SerializeField] private List<Transform> waitPoints = new List<Transform>();
+    [SerializeField] private List<Transform> collectPoints = new List<Transform>();
+    [SerializeField] private List<Transform> leavePoints = new List<Transform>();
     [SerializeField] private float objectSpeed;
     [SerializeField] private GameObject checkPointsOrderPrefab;
     [SerializeField] private GameObject checkPointsWaitPrefab;
+    [SerializeField] private GameObject checkPointsCollectPrefab;
+    [SerializeField] private GameObject checkPointsLeavePrefab;
     [SerializeField] private float rotationSpeed;
     int nextPointIndex;
     public Transform nextPoint;
@@ -25,7 +29,10 @@ public class Customer : MonoBehaviour
         WalkingToOrder,
         WalkingToWait,
         WaitingForFood,
-        WaitingToOrder
+        WaitingToOrder,
+        WalkingToCollect,
+        WalkingToLeave,
+        Delaying
     }
 
     // Start is called before the first frame update
@@ -43,6 +50,16 @@ public class Customer : MonoBehaviour
             waitPoints.Add(checkPointsWaitPrefab.transform.GetChild(i));
         }
 
+        for(int i = 0; i < checkPointsCollectPrefab.transform.childCount; i++)
+        {
+            collectPoints.Add(checkPointsCollectPrefab.transform.GetChild(i));
+        }
+
+        for (int i = 0; i < checkPointsLeavePrefab.transform.childCount; i++)
+        {
+            leavePoints.Add(checkPointsLeavePrefab.transform.GetChild(i));
+        }
+
         nextPoint = orderPoints[0];  
     }
 
@@ -56,6 +73,14 @@ public class Customer : MonoBehaviour
         else if(state == State.WalkingToWait)
         {
             MoveCustomerToWait();
+        }
+        else if(state == State.WalkingToCollect)
+        {
+            MoveCustomerToCollect();
+        }
+        else if(state == State.WalkingToLeave)
+        {
+            MoveCustomerToLeave();
         }
         RotateCustomer();
     }
@@ -101,6 +126,54 @@ public class Customer : MonoBehaviour
         }
     }
 
+    void MoveCustomerToCollect()
+    {
+        if (transform.position == nextPoint.position)
+        {
+            nextPointIndex++;
+            if (state != State.Delaying && nextPointIndex >= collectPoints.Count)
+            {
+                Debug.Log("Reached ending point for collect");
+                StartCoroutine(CollectFood());
+                state = State.Delaying;
+                return;
+            }
+            nextPoint = collectPoints[nextPointIndex];
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, nextPoint.position, objectSpeed * Time.deltaTime);
+            //transform.LookAt(nextPoint.position, Vector3.up);
+        }
+    }
+
+    IEnumerator CollectFood()
+    {
+        yield return new WaitForSeconds(2f);
+        nextPointIndex = 0;
+        state = State.WalkingToLeave;
+    }
+
+    void MoveCustomerToLeave()
+    {
+        if (transform.position == nextPoint.position)
+        {
+            nextPointIndex++;
+            if (nextPointIndex >= leavePoints.Count)
+            {
+                Debug.Log("Reached ending point for leave");
+                Destroy(gameObject);
+                return;
+            }
+            nextPoint = leavePoints[nextPointIndex];
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, nextPoint.position, objectSpeed * Time.deltaTime);
+            //transform.LookAt(nextPoint.position, Vector3.up);
+        }
+    }
+
     void RotateCustomer()
     {
         direction = (nextPoint.position - transform.position).normalized;
@@ -124,6 +197,15 @@ public class Customer : MonoBehaviour
         //Write code for customer to walk back and wait for food
         state = State.WalkingToWait;
         nextPoint = waitPoints[0];
+        nextPointIndex = 0;
+    }
+
+    public void CollectOrder()
+    {
+        Debug.Log("Order Getting Collected...");
+        //Write code for customer to walk back and collect food
+        state = State.WalkingToCollect;
+        nextPoint = collectPoints[0];
         nextPointIndex = 0;
     }
 }

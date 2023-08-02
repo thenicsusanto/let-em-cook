@@ -47,4 +47,23 @@ public class Bell : MonoBehaviour
             orderPlatform.currentCustomer.GetComponent<Customer>().TakeOrder();
         }
     }
+
+    private void Update()
+    {
+        //Remove this code and use bell when checking collect order
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("checking collect order with space bar");
+            CheckCollectOrder();
+        }
+    }
+
+    public void CheckCollectOrder()
+    {
+        if (orderPlatform.priorityCustomer != null)
+        {
+            Debug.Log("Takes Order from CheckWaiting in Bell Script");
+            orderPlatform.priorityCustomer.GetComponent<Customer>().CollectOrder();
+        }
+    }
 }

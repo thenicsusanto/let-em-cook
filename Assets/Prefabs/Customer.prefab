@@ -114,10 +114,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderPoints: []
   waitPoints: []
+  collectPoints: []
+  leavePoints: []
   objectSpeed: 3
   checkPointsOrderPrefab: {fileID: 5157521230044610960, guid: 2d5f48537d2e45746a87150503e75321,
     type: 3}
   checkPointsWaitPrefab: {fileID: 7700352890960757686, guid: 629908e19df0d164d9d8e937c8431fd6,
+    type: 3}
+  checkPointsCollectPrefab: {fileID: 7071739839733749663, guid: 3f464cd27445c214a9130ec2900e62e8,
+    type: 3}
+  checkPointsLeavePrefab: {fileID: 3885566170340633999, guid: 8a9a68769eb24ca449ab52d5fa2a3aca,
     type: 3}
   rotationSpeed: 3
   nextPoint: {fileID: 0}
