@@ -20,7 +20,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (health <= 0)
+            SceneManager.LoadScene("MainMenu");
     }
     void OnTrigHold(InputValue inputValue)
     {

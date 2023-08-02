@@ -40,7 +40,7 @@ public class HotDogEnemy : MonoBehaviour
             Vector3 vel = other.gameObject.GetComponent<Rigidbody>().velocity;
             if(vel.x != 0 || vel.z != 0 || vel.y != 0.1)
             {
-                GetComponent<HotDogEnemy>().enabled = false;
+                Destroy(this.gameObject);
             }
         }
     }

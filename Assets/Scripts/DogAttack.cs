@@ -5,13 +5,14 @@ using UnityEngine;
 public class DogAttack : MonoBehaviour
 {
     public GameObject player;
+    private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectsWithTag("Player")[0];
 
-        Vector3 vel = player.transform.position - transform.position;
+        Vector3 vel = (player.transform.position - transform.position).normalized;
 
         Quaternion newRot = Quaternion.LookRotation(vel);
         transform.rotation = newRot;
@@ -20,7 +21,8 @@ public class DogAttack : MonoBehaviour
 
         vel *= 1f;
         Debug.Log(vel);
-        GetComponent<Rigidbody>().velocity = (vel);
+        rb = GetComponent<Rigidbody>();
+        rb.velocity = (vel);
 
         
     }
@@ -28,6 +30,8 @@ public class DogAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 vel = (player.transform.position - transform.position).normalized;
+        rb.velocity = vel;
         if(Mathf.Abs(player.transform.position.x - transform.position.x) < 0.1f &&
             Mathf.Abs(player.transform.position.z - transform.position.z) < 0.1f)
         {
