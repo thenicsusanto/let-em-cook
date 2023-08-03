@@ -8,6 +8,8 @@ TagManager:
   - leftHand
   - Customer
   - DOG
+  - Fire
+  - ground
   layers:
   - Default
   - TransparentFX

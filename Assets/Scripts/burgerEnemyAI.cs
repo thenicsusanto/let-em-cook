@@ -17,19 +17,22 @@ public class burgerEnemyAI : MonoBehaviour
     {
         /*anim.SetBool("Coming Closer", true);*/
         player = GameObject.FindGameObjectsWithTag("Player")[0];
+        StartCoroutine(MovePosition(10));
     }
 
-    // Update is called once per frame
-    void Update()
+
+    IEnumerator MovePosition(float sec)
     {
-        if(Mathf.Abs(player.transform.position.x - transform.position.x) < 1 &&
-            Mathf.Abs(player.transform.position.z - transform.position.z) < 1)
+        float timer = 0;
+        Vector3 oldPos = this.transform.position;
+        Vector3 targetPos = player.transform.position;
+        while(timer < sec)
         {
-            /*anim.SetBool("Attacking", true);*/
-        }
-        else
-        {
-            transform.position = Vector3.Lerp(transform.position, player.transform.position, Time.deltaTime);
+            timer += Time.deltaTime;
+            Vector3 playerPos = Vector3.Lerp(oldPos, targetPos, timer / sec);
+
+            transform.position = new Vector3(playerPos.x, transform.position.y, playerPos.z);
+            yield return null;
         }
     }
 
@@ -40,6 +43,15 @@ public class burgerEnemyAI : MonoBehaviour
             player.GetComponent<Movement>().health -= 10;
 
         }
+        else if(collision.gameObject.CompareTag("ground"))
+        {
+            EnemyJump();
+        }
+    }
+
+    private void EnemyJump()
+    {
+        GetComponent<Rigidbody>().AddForce(Vector3.up * 5, ForceMode.Impulse);
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -49,6 +61,7 @@ public class burgerEnemyAI : MonoBehaviour
             health -= 3;
             if (health < 1)
                 Destroy(this.gameObject);
+            
         }
 
     }
