@@ -20,7 +20,7 @@ public class DogAttack : MonoBehaviour
 
 
         vel *= 1f;
-        Debug.Log(vel);
+        //Debug.Log(vel);
         rb = GetComponent<Rigidbody>();
         rb.velocity = (vel);
 
@@ -45,9 +45,9 @@ public class DogAttack : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(!collision.gameObject.CompareTag("DOG"))
+        if(collision.gameObject == this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

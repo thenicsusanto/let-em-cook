@@ -177,7 +177,7 @@ public class Customer : MonoBehaviour
         direction = (nextPoint.position - transform.position).normalized;
 
         //create the rotation we need to be in to look at the target
-        lookRotation = Quaternion.LookRotation(direction);
+        //lookRotation = Quaternion.LookRotation(direction);
 
         //rotate us over time according to speed until we are in the required rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);

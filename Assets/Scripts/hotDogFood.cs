@@ -35,10 +35,7 @@ public class hotDogFood : MonoBehaviour
         //{
         //    this.GetComponentInChildren<MeshRenderer>().material = materials[1];
         //    this.gameObject.GetComponentInChildren<DogAttack>().enabled = true;
-        //}
-
-        Debug.Log(GetComponent<Rigidbody>().isKinematic + " kinematic");
-            
+        //}            
     }
 
     public void SetRigidbody()
