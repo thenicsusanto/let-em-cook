@@ -18,7 +18,7 @@ public class SnapFood : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "DOG" && collider.gameObject != this.transform.parent)
+        if (collider.gameObject.GetComponent<hotDogFood>() != null && collider.gameObject != this.transform.parent)
         {
             Debug.Log("Collided with: " + collider.name);
             collider.GetComponent<XRGrabInteractable>().enabled = false;
@@ -26,7 +26,7 @@ public class SnapFood : MonoBehaviour
             collider.GetComponent<Rigidbody>().isKinematic = true;
             collider.isTrigger = true;
             collider.transform.SetParent(transform.parent);
-            collider.transform.localPosition = new Vector3(0, 0, 0);
+            collider.transform.localPosition = new Vector3(0, 1.25f, 0);
 
             collider.transform.localRotation = Quaternion.identity;
             collider.transform.localScale = Vector3.one;
