@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class deepFryerBehavior : MonoBehaviour
 {
-
+    GameObject fryerBasket;
 
 
     // Start is called before the first frame update
@@ -21,9 +21,10 @@ public class deepFryerBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("DeepFryer"))
+        if(other.CompareTag("fryerBasket"))
         {
-            //other.gameObject.transform.position =
+            other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            fryerBasket = other.gameObject;
 
         }
     }
